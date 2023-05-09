@@ -1,0 +1,403 @@
+// 
+// print.scss
+//
+
+.printonly {
+    display: none;
+}
+
+// Used invoice page
+@media print {
+    .vertical-menu,
+    .right-bar,
+    .page-title-box,
+    .navbar-header,
+    .footer,
+    .d-print-none {
+        display: none !important;
+    }
+    .card-body,
+    .main-content,
+    .right-bar,
+    .page-content,
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .card{
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    * {
+        /* do not change colors */
+        -webkit-print-color-adjust: exact !important; /*Chrome, Safari */
+        color-adjust: exact !important;  /*Firefox*/
+        /* page breaks fix */
+        position: relative;
+    }
+
+    @page {
+        size: A4;
+        margin: 20mm 14mm 20mm 20mm;
+        --bs-body-font-size: 0.6rem;
+    }
+
+    .printonly {
+        display: block;
+    }
+    
+    body,
+    html,
+    .page-content {
+        background: #fff;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100% !important;
+        width: 100% !important;
+        display: block;
+    }
+
+    body .card.data-wrapper,
+    body .card.data-wrapper .card-body {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    // main content wrapper should always be 100% width
+    .page-content > .container-fluid > .row > * {
+        width: 100% !important;
+    }
+
+    /* Avoid elements breaking between pages */
+    ul li,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    .print-no-break {
+        display: block !important;
+        width: 100% !important;
+        page-break-inside: avoid !important;
+    }
+
+    .print-clear-both {
+        clear: both;
+    }
+
+    // Bootstrap styles fixes
+    .col-1{
+        float: left;
+        width:8.33333333%
+    }
+
+    .col-2{
+        float: left;
+        width:16.66666667%
+    }
+
+    .col-3{
+        float: left;
+        width:25%
+    }
+
+    .col-4{
+        float: left;
+        width:33.33333333%
+    }
+
+    .col-5{
+        float: left;
+        width:41.66666667%
+    }
+
+    .col-6{
+        float: left;
+        width:50%
+    }
+
+    .col-7{
+        float: left;
+        width:58.33333333%
+    }
+
+    .col-8{
+        float: left;
+        width:66.66666667%
+    }
+
+    .col-9{
+        float: left;
+        width:75%
+    }
+
+    .col-10{
+        float: left;
+        width:83.33333333%
+    }
+
+    .col-11{
+        float: left;
+        width:91.66666667%
+    }
+
+    .col-12{
+        float: left;
+        width:100%
+    }
+
+
+    .col-sm-1{
+        float: left;
+        width:8.33333333%
+    }
+
+    .col-sm-2{
+        float: left;
+        width:16.66666667%
+    }
+
+    .col-sm-3{
+        float: left;
+        width:25%
+    }
+
+    .col-sm-4{
+        float: left;
+        width:33.33333333%
+    }
+
+    .col-sm-5{
+        float: left;
+        width:41.66666667%
+    }
+
+    .col-sm-6{
+        float: left;
+        width:50%
+    }
+
+    .col-sm-7{
+        float: left;
+        width:58.33333333%
+    }
+
+    .col-sm-8{
+        float: left;
+        width:66.66666667%
+    }
+
+    .col-sm-9{
+        float: left;
+        width:75%
+    }
+
+    .col-sm-10{
+        float: left;
+        width:83.33333333%
+    }
+
+    .col-sm-11{
+        float: left;
+        width:91.66666667%
+    }
+
+    .col-sm-12{
+        float: left;
+        width:100%
+    }
+
+
+    .col-md-1{
+        float: left;
+        width:8.33333333%
+    }
+
+    .col-md-2{
+        float: left;
+        width:16.66666667%
+    }
+
+    .col-md-3{
+        float: left;
+        width:25%
+    }
+
+    .col-md-4{
+        float: left;
+        width:33.33333333%
+    }
+
+    .col-md-5{
+        float: left;
+        width:41.66666667%
+    }
+
+    .col-md-6{
+        float: left;
+        width:50%
+    }
+
+    .col-md-7{
+        float: left;
+        width:58.33333333%
+    }
+
+    .col-md-8{
+        float: left;
+        width:66.66666667%
+    }
+
+    .col-md-9{
+        float: left;
+        width:75%
+    }
+
+    .col-md-10{
+        float: left;
+        width:83.33333333%
+    }
+
+    .col-md-11{
+        float: left;
+        width:91.66666667%
+    }
+
+    .col-md-12{
+        float: left;
+        width:100%
+    }
+
+
+    .col-lg-1{
+        float: left;
+        width:8.33333333%
+    }
+
+    .col-lg-2{
+        float: left;
+        width:16.66666667%
+    }
+
+    .col-lg-3{
+        float: left;
+        width:25%
+    }
+
+    .col-lg-4{
+        float: left;
+        width:33.33333333%
+    }
+
+    .col-lg-5{
+        float: left;
+        width:41.66666667%
+    }
+
+    .col-lg-6{
+        float: left;
+        width:50%
+    }
+
+    .col-lg-7{
+        float: left;
+        width:58.33333333%
+    }
+
+    .col-lg-8{
+        float: left;
+        width:66.66666667%
+    }
+
+    .col-lg-9{
+        float: left;
+        width:75%
+    }
+
+    .col-lg-10{
+        float: left;
+        width:83.33333333%
+    }
+
+    .col-lg-11{
+        float: left;
+        width:91.66666667%
+    }
+
+    .col-lg-12{
+        float: left;
+        width:100%
+    }
+
+
+    .col-xl-1{
+        float: left;
+        width:8.33333333%
+    }
+
+    .col-xl-2{
+        float: left;
+        width:16.66666667%
+    }
+
+    .col-xl-3{
+        float: left;
+        width:25%
+    }
+
+    .col-xl-4{
+        float: left;
+        width:33.33333333%
+    }
+
+    .col-xl-5{
+        float: left;
+        width:41.66666667%
+    }
+
+    .col-xl-6{
+        float: left;
+        width:50%
+    }
+
+    .col-xl-7{
+        float: left;
+        width:58.33333333%
+    }
+
+    .col-xl-8{
+        float: left;
+        width:66.66666667%
+    }
+
+    .col-xl-9{
+        float: left;
+        width:75%
+    }
+
+    .col-xl-10{
+        float: left;
+        width:83.33333333%
+    }
+
+    .col-xl-11{
+        float: left;
+        width:91.66666667%
+    }
+
+    .col-xl-12{
+        float: left;
+        width:100%
+    }
+
+
+    .page-content .header-wrapper {
+       position: absolute;
+       z-index: 10;
+    }
+}

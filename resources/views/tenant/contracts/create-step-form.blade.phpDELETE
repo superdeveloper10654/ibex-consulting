@@ -1,0 +1,2367 @@
+@extends('tenant.layouts.master')
+
+@section('title')
+@lang('New Contract')
+@endsection @section('content')
+<link rel="stylesheet" type="text/css" href="{{URL::asset('/assets/css/multi-form.css')}}">
+
+@component('components.breadcrumb')
+@slot('li_1') Contracts @endslot
+@slot('title') New Contract
+@endslot @endcomponent
+
+<div class="row justify-content-center">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">NEC3 Suite</h4>
+                <p class="card-title-desc">Please select the contract type</p>
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link mb-2" id="ECC-tab" data-bs-toggle="pill" href="#ECC" role="tab" aria-controls="ECC" aria-selected="false">ECC</a>
+                            <a class="nav-link mb-2" id="ECS-tab" data-bs-toggle="pill" href="#ECS" role="tab" aria-controls="ECS" aria-selected="false">ECS</a>
+                            <a class="nav-link mb-2" id="TSC-tab" data-bs-toggle="pill" href="#TSC" role="tab" aria-controls="TSC" aria-selected="true">TSC</a>
+                        </div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="tab-content px-3 text-muted mt-4 mt-md-0" id="v-pills-tabContent">
+                            <div class="tab-pane fade" id="ECC" role="tabpanel" aria-labelledby="ECC-tab">
+                                <p>>Engineering and Construction Contract</p>
+                                <p>This contract should be used for the appointment of a contractor for engineering and construction work, including any level of design responsibility. It contains all core clauses and secondary option clauses, together with
+                                    the schedules of cost components and forms for contract data.
+                                </p>
+                            </div>
+                            <div class="tab-pane fade" id="ECS" role="tabpanel" aria-labelledby="ECS-tab">
+                                <p>>Engineering and Construction Subcontract</p>
+                                <p>This subcontract is intended for use in appointing a subcontractor where the contractor has been appointed under the NEC3 Engineering and construction options, the available secondary options, schedules of cost components
+                                    and contract data.
+                                </p>
+                            </div>
+                            <div class="tab-pane fade" id="TSC" role="tabpanel" aria-labelledby="TSC-tab">
+                                <p>>Term Services Contract</p>
+                                <p>This contract should be used for the appointment of a contractor for engineering and construction work, including any level of design responsibility. It contains all core clauses and secondary option clauses, together with
+                                    the schedules of cost components and forms for contract data.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-light btn-rounded w-md waves-effect waves-light" id="continue-1">Continue&nbsp;<i class="bx bx-down-arrow-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9" id="contents">
+        <form id="contractForm" action="#" method="POST">
+
+            <!-- One "tab" for each step in the form: -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab">
+                        <h4>Form of Agreement</h4>
+                        <p class="card-title-desc">Please complete all fields below</p>
+                        <form id="" action="" method="post" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Contract title</label>
+                                        <input class="form-control" type="text" name="contract_title" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Contractor name</label>
+                                        <input class="form-control" type="text" name="contractor_name" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label class="form-label works_or_service">Works Information</label>
+                                    <textarea name="works_or_service" id="works_or_service" class="form-control" rows="3" required></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label class="form-label">Additional documents</label>
+                                    <textarea name="additional_documents" class="form-control" rows="3" required></textarea>
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Two "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>Options</h4>
+                        <p class="card-title-desc">Please select all the appropriate options</p>
+                        <div class="row">
+                            <div class="mb-3">
+                                <label class="form-label">Main Option</label>
+                                <select name="main_option" id="main_option" class="form-select">
+                                    <option>Select</option>
+                                    <option id="ecc-opt-a" value="Option A: Priced contract with Activity Schedule">Option A: Priced contract with Activity Schedule</option>
+                                    <option id="ecc-opt-b" value="Option B: Priced contract with Bill of Quantities">Option B: Priced contract with Bill of Quantities</option>
+                                    <option id="ecc-opt-c" value="Option C: Target contract with Activity Schedule">Option C: Target contract with Activity Schedule</option>
+                                    <option id="ecc-opt-d" value="Option D: Target contract with Bill of Quantities">Option D: Target contract with Bill of Quantities</option>
+                                    <option id="ecc-opt-e" value="Option E: Cost reimbursable contract">Option E: Cost reimbursable contract</option>
+                                    <option id="ecc-opt-f" value="Option F: Management contract">Option F: Management contract</option>
+                                    <option id="ecs-opt-a" value="Option A: Priced subcontract with Activity Schedule">Option A: Priced subcontract with Activity Schedule</option>
+                                    <option id="ecs-opt-b" value="Option B: Priced subcontract with Bill of Quantities">Option B: Priced subcontract with Bill of Quantities</option>
+                                    <option id="ecs-opt-c" value="Option C: Target subcontract with Activity Schedule">Option C: Target subcontract with Activity Schedule</option>
+                                    <option id="ecs-opt-d" value="Option D: Target subcontract with Bill of Quantities">Option D: Target subcontract with Bill of Quantities</option>
+                                    <option id="ecs-opt-e" value="Option E: Cost reimbursable subcontract">Option E: Cost reimbursable subcontract</option>
+                                    <option id="tsc-opt-a" value="Option A: Priced contract with Activity Schedule">Option A: Priced contract with Price List</option>
+                                    <option id="tsc-opt-c" value="Option C: Priced contract with Bill of Quantities">Option C: Priced contract with Bill of Quantities</option>
+                                    <option id="tsc-opt-e" value="Option E: Cost reimbursable contract">Option E: Cost reimbursable contract</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                                <label class="form-label">Dispute Resolution Option</label>
+                                <select name="dispute_resolution_option" id="dispute_resolution_option" class="form-select">
+                                    <option>Select</option>
+                                    <option id="w1" value="W1 (consensual adjudication outside the Construction Act)">W1 (consensual adjudication outside the Construction Act)</option>
+                                    <option id="w2" value="W2 (mandatory adjudication as prescribed in the Construction Act)">W2 (mandatory adjudication as prescribed in the Construction Act)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <input type="hidden" name="x1" value="0">
+                                <input type="hidden" name="x2" value="0">
+                                <input type="hidden" name="x3" value="0">
+                                <input type="hidden" name="x4" value="0">
+                                <input type="hidden" name="x5" value="0">
+                                <input type="hidden" name="x6" value="0">
+                                <input type="hidden" name="x7" value="0">
+                                <input type="hidden" name="x12" value="0">
+                                <input type="hidden" name="x13" value="0">
+                                <input type="hidden" name="x14" value="0">
+                                <input type="hidden" name="x15" value="0">
+                                <input type="hidden" name="x16" value="0">
+                                <input type="hidden" name="x17" value="0">
+                                <input type="hidden" name="x18" value="0">
+                                <input type="hidden" name="x19" value="0">
+                                <input type="hidden" name="x20" value="0">
+                                <input type="hidden" name="yUK1" value="0">
+                                <input type="hidden" name="yUK2" value="0">
+                                <input type="hidden" name="yUK3" value="0">
+                                <input type="hidden" name="z1" value="0">
+                                <label class="form-label">Secondary Options</label>
+                                <div class="row pt-2" id="row-x1">
+                                    <input type="checkbox" name="x1" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X1: Price adjustment for inflation</label>
+                                </div>
+                                <div class="row pt-2">
+                                    <input type="checkbox" name="x2" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X2: Changes in the law</label>
+                                </div>
+                                <div class="row pt-2" id="row-x3">
+                                    <input type="checkbox" name="x3" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X3: Multiple currencies</label>
+                                </div>
+                                <div class="row pt-2">
+                                    <input type="checkbox" name="x4" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X4: Parent company guarantee</label>
+                                </div>
+                                <div class="row pt-2" id="row-x5">
+                                    <input type="checkbox" name="x5" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X5: Sectional Completion</label>
+                                </div>
+                                <div class="row pt-2" id="row-x6">
+                                    <input type="checkbox" name="x6" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X6: Bonus for early Completion</label>
+                                </div>
+                                <div class="row pt-2" id="row-x7">
+                                    <input type="checkbox" name="x7" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X7: Delay damages</label>
+                                </div>
+                                <div class="row pt-2" id="row-x12">
+                                    <input type="checkbox" name="x12" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X12: Partnering</label>
+                                </div>
+                                <div class="row pt-2">
+                                    <input type="checkbox" name="x13" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X13: Performance bond</label>
+                                </div>
+                                <div class="row pt-2" id="row-x14">
+                                    <input type="checkbox" name="x14" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X14: Advanced payment to the Contractor</label>
+                                </div>
+                                <div class="row pt-2" id="row-x15">
+                                    <input type="checkbox" name="x15" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X15: Limitation of the Contractor's Design</label>
+                                </div>
+                                <div class="row pt-2" id="row-x16">
+                                    <input type="checkbox" name="x16" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X16: Retention</label>
+                                </div>
+                                <div class="row pt-2">
+                                    <input type="checkbox" name="x17" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X17: Low performance damages</label>
+                                </div>
+                                <div class="row pt-2">
+                                    <input type="checkbox" name="x18" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X18: Limitation of liability</label>
+                                </div>
+                                <div class="row pt-2">
+                                    <input type="checkbox" name="x19" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X19: Task Order</label>
+                                </div>
+                                <div class="row pt-2" id="row-x20">
+                                    <input type="checkbox" name="x20" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">X20: Key Performance Indicators</label>
+                                </div>
+                                <div class="row pt-2">
+                                    <input type="checkbox" name="yUK1" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">Y(UK)1: contract Bank Account</label>
+                                </div>
+                                <div class="row pt-2">
+                                    <input type="checkbox" name="yUK2" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">Y(UK)2: The Housing Grants, Construction and Regeneration Act 1996</label>
+                                </div>
+                                <div class="row pt-2">
+                                    <input type="checkbox" name="yUK3" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">Y(UK)3: The Contract (Rights of Third Parties) Act 1999</label>
+                                </div>
+                                <div class="row pt-2">
+                                    <input type="checkbox" name="z1" class="customized secondary-option" />
+                                    <label style="width: calc(100% - 100px); font-weight: 400;">Z1: additional conditions of Contract</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Three "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part one - Data provided by the <i>Employer</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+
+                        <h4 class="card-title mt-4 mb-3">1. General</h4>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>conditions of contract</i> are the core clauses and the clauses for main <span class="selected_main_option"></span>, dispute resolution Option <span class="selected_dispute_resolution_option"></span> and Secondary Options
+                                <span id="selected_secondary_options"></span> of the <span class="selected_contract"></span>.
+                            </li>
+                            <li class="mb-3">The <i>works</i> are
+                                <textarea name="works_are" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                            <li class="mb-3">The <i>Employer</i> is
+                                <p class="mb-0 mt-3">Name</p>
+                                <input type="text" name="employer_name_is" class="form-control mt-2" required>
+                                <p class="mb-0 mt-3">Address</p>
+                                <textarea name="employer_address_is" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                            <li class="mb-3">The <i>Project Manager</i> is
+                                <p class="mb-0 mt-3">Name</p>
+                                <input type="text" name="pm_name_is" class="form-control mt-2" required>
+                                <p class="mb-0 mt-3">Address</p>
+                                <textarea name="pm_address_is" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                            <li class="mb-3">The <i>Supervisor</i> is
+                                <p class="mb-0 mt-3">Name</p>
+                                <input type="text" name="sup_name_is" class="form-control mt-2" required>
+                                <p class="mb-0 mt-3">Address</p>
+                                <textarea name="sup_address_is" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                            <li class="mb-3">The <i>Adjudicator</i> is
+                                <p class="mb-0 mt-3">Name</p>
+                                <input type="text" name="adj_name_is" class="form-control mt-2" required>
+                                <p class="mb-0 mt-3">Address</p>
+                                <textarea name="adj_address_is" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Six "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part one - Data provided by the <i>Employer</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+                        <h4 class="card-title mt-4 mb-3">2. General</h4>
+                        <ul class="mb-4">
+                            <li class="mb-4">The Works Information is in
+                                <textarea name="works_information_is_in" class="form-control mt-2 mb-3" rows="3" required>WI 100 to WI 2000 (below).</textarea>
+                                <div class="ms-3">
+                                    <p class="works_or_service mb-3">Works Information</p>
+                                    <div class="mb-3">
+                                        <div class="works_or_service mb-2">WI 100: Description of the Works</div>
+                                        <textarea name="wi100" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="works_or_service mb-2">WI 200: General constraints on how the Contractor provides the Works</div>
+                                        <textarea name="wi200" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 300: Contractor's Design</div>
+                                        <textarea name="wi300" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 400: Completion</div>
+                                        <textarea name="wi400" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 500: Programme</div>
+                                        <textarea name="wi500" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 600: Quality assurance</div>
+                                        <textarea name="wi600" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 700: Tests and inspections</div>
+                                        <textarea name="wi700" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="works_or_service mb-2">WI 800: Management of the Works</div>
+                                        <textarea name="wi800" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 900: Working with the Employer and others</div>
+                                        <textarea name="wi900" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 1000: Services and other things to be provided</div>
+                                        <textarea name="wi1000" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 1100: Health and safety</div>
+                                        <textarea name="wi1100" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 1200: Subcontracting</div>
+                                        <textarea name="wi1200" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 1300: Title</div>
+                                        <textarea name="wi1300" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-2">WI 2000: Employer's work specifications and drawings</div>
+                                        <textarea name="wi2000" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mt-3 mb-3">The <i>boundaries of the site</i> are
+                                <textarea name="boundaries_are" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                            <li class="mb-3">The <i>language of this contract</i> is
+                                <input type="text" name="language_is" class="form-control mt-2" value="English." required>
+                            </li>
+                            <li class="mb-3">The <i>law of the contract</i> is the law of
+                                <input type="text" name="law_is" class="form-control mt-2" value="England and Wales." required>
+                            </li>
+                            <li class="mb-3">The <i>period for reply</i> is
+                                <div class="input-group">
+                                    <input name="period_for_reply_is" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;" required>
+                                    <label class="input-group-text mt-2">weeks</label>
+                                </div>
+                            </li>
+                            <li class="mb-3">The <i>Adjudicator nominating body</i> is
+                                <input type="text" name="adjudicator_body_is" class="form-control mt-2" required>
+                            </li>
+                            <li class="mb-3">The <i>tribunal</i> is
+                                <input type="text" name="tribunal_is" class="form-control mt-2" required>
+                            </li>
+                            <li>The following matters will be included in the Risk Register
+                                <textarea name="risk_register_matters_are" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Four "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part one - Data provided by the <i>Employer</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+                        <h4 class="card-title mt-4 mb-3">3. Time</h4>
+                        <ul class="mb-4">
+                            <li class="mb-3 col-md-3">The <i>starting date</i> is
+                                <x-form.datetime-local class="mt-2" name="starting_date" required />
+                            </li>
+                            <li class="mb-3">The <i>access dates</i> are
+                                <p class="mt-2 mb-3">Part of the Site</p>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <input type="text" name="access_site_part_1" class="form-control" required>
+                                    <div class="input-group-append">
+                                        <x-form.datetime-local name="access_date_1" style="border-bottom-left-radius: 0; border-top-left-radius: 0;" required />
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <input type="text" name="access_site_part_2" class="form-control">
+                                    <div class="input-group-append">
+                                        <x-form.datetime-local name="access_date_2" style="border-bottom-left-radius: 0; border-top-left-radius: 0;" />
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <input type="text" name="access_site_part_3" class="form-control">
+                                    <div class="input-group-append">
+                                        <x-form.datetime-local name="access_date_3" style="border-bottom-left-radius: 0; border-top-left-radius: 0;" />
+                                    </div>
+                                </div>
+                            </li>
+                            <li>The <i>Contractor</i> submits revised programmes at intervals no longer than
+                                <div class="input-group">
+                                    <input name="programme_interval_is" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;" required>
+                                    <label class="input-group-text mt-2">weeks</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Five "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part one - Data provided by the <i>Employer</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+                        <h4 class="card-title mt-4 mb-3">4. Testing and Defects</h4>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>defects date</i> is
+                                <div class="input-group">
+                                    <input name="defects_date" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">weeks after Completion of the whole of the&nbsp;<i>works</i></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mb-3">The <i>defects correction period</i> is
+                                <div class="input-group">
+                                    <input name="defect_correction_period" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">weeks except that</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="ms-3 mb-3">The <i>defects correction period</i> for
+                                <div class="input-group">
+                                    <input name="defect_correction_period_exception_1_text" type="text" class="form-control mt-2">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">is</span>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="mt-2">
+                                            <input name="defect_correction_period_exception_1_number" type="number" class="form-control mt-2" style="width: 100px; border-radius: 0;">
+                                        </span>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">weeks</span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <input name="defect_correction_period_exception_2_text" type="text" class="form-control mt-2">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">is</span>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="mt-2">
+                                            <input name="defect_correction_period_exception_2_number" type="number" class="form-control mt-2" style="width: 100px; border-radius: 0;">
+                                        </span>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">weeks</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Six "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part one - Data provided by the <i>Employer</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+
+                        <h4 class="card-title mt-4 mb-3">5. Payment</h4>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>currency of this contract</i> is the
+                                <input type="text" name="currency_is" class="form-control mt-2" value="Pound Sterling" required>
+                            </li>
+                            <li class="mb-3">The <i>assessment interval</i> is
+                                <div class="input-group">
+                                    <input name="assessment_interval" type="number" max="5" class="form-control mt-2" style="flex: inherit; width: 100px;" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">weeks (not more than five)</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mb-3">The <i>interest rate</i> is
+                                <div class="input-group">
+                                    <input name="interest_rate_percentage" type="number" min="2" step="0.01" class="form-control mt-2" style="flex: inherit; width: 100px;">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">% per annum (not less than 2) above the</span>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="mt-2">
+                                            <input name="interest_rate_text_1" type="text" class="form-control mt-2" style="width: 100px; border-radius: 0;" value="base">
+                                        </span>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">rate of the </span>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="mt-2">
+                                            <input name="interest_rate_text_2" type="text" class="form-control mt-2" style="border-radius: 0;" value="Bank of England">
+                                        </span>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">bank</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Six "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part one - Data provided by the <i>Employer</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+
+                        <h4 class="card-title mt-4 mb-3">6. Compensation Events</h4>
+                        <ul class="mb-4">
+                            <li class="mb-3">The place where weather is to be recorded is
+                                <input type="text" name="weather_recording_place_is" class="form-control mt-2" required>
+                            </li>
+                            <li class="mb-3">The <i>weather measurements</i> to be recorded for each calendar month are
+                            </li>
+                            <li class="ms-3">the cumulative rainfall (mm)
+                            </li>
+                            <li class="ms-3">the number of days with rainfall more than 5 mm
+                            </li>
+                            <li class="ms-3">the number of days with minimum air temperature less than 0 degree Celsius
+                            </li>
+                            <li class="ms-3 mb-3">the number of days with snow lying at
+                                <div class="input-group">
+                                    <input name="weather_recording_snow_hour" type="time" class="form-control mt-2" style="flex: inherit; width: 100px;" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mt-2">hours GMT</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="ms-3 mb-3">and these measurements:
+                                <textarea name="weather_recording_additional" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                            <li class="mb-3">The <i>weather measurements</i> are supplied by
+                                <input type="text" name="weather_recording_supplier" class="form-control mt-2" required>
+                            </li>
+                            <li class="mb-3">The <i>weather data</i> are the records of past <i>weather measurements</i> for each calendar month which are recorded at
+                                <input type="text" name="weather_data_recorded_at" class="form-control mt-2 mb-3" required> and which are available from
+                                <input type="text" name="weather_data_available_from" class="form-control mt-2" required>
+                            </li>
+                            <p class="mt-3">Where no recorded data are available</p>
+                            <li class="mb-3">Assumed values for the ten year return <i>weather data</i> for each <i>weather measurement</i> for each calendar month are
+                                <textarea name="weather_data_assumed" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Six "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part one - Data provided by the <i>Employer</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+
+                        <h4 class="card-title mt-4 mb-3">8. Risks and insurance</h4>
+                        <ul class="mb-4">
+                            <li class="mb-3">The minimum limit of indemnity for insurance in respect of loss of or damage to property (except the <i>works</i>, Plant and Materials and Equipment) and liability for bodily injury or death of a person (not an employee of the <i>Contractor</i>)
+                                caused by an activity in connection with this contract for any one event is
+                                <input type="text" name="insurance_text_1" class="form-control mt-2" required>
+                            </li>
+                            <li class="mb-3">The minimum limit of indemnity for insurance in respect of death of or bodily injury to employees of the <i>Contractor</i>) arising out of and in the course of their employment in connection with this contract for any one event is
+                                <input type="text" name="insurance_min_text_2" class="form-control mt-2" required>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Seven "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part one - Data provided by the <i>Employer</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+                        <h4 class="card-title mt-4 mb-3">Optional Statements</h4>
+                        <p class="mt-3">If <i>tribunal</i> is arbitration</p>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>arbitration proceedure</i> is
+                                <input type="text" name="arbitration_proceedure_is" class="form-control mt-2" required>
+                            </li>
+                            <li class="mb-3">The place where arbitration is to be held is
+                                <input type="text" name="arbitration_place_is" class="form-control mt-2" required>
+                            </li>
+                            <li>The person or organisation who will choose an arbitrator
+                            </li>
+                            <li class="ms-3">if the Parties cannot agree a choice or
+                            </li>
+                            <li class="ms-3">if the <i>arbitration proceedure</i> does not state who selects an arbitrator is
+                                <input type="text" name="arbitration_chooser_is" class="form-control mt-2" required>
+                            </li>
+                        </ul>
+                        <p class="mt-3">If the <i>Employer</i> has decided the <i>completion date</i> for the whole of the <i>works</i></p>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>completion date</i> for the whole of the <i>works</i> is
+                                <input class="form-control mt-2" type="datetime-local" id="completion_date" name="completion_date" style="width: 220px;" required>
+                            </li>
+                        </ul>
+                        <p class="mt-3">If the <i>Employer</i> is not willing to take over the <i>works</i> before the Completion Date</p>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>Employer</i> is not willing to take over the <i>works</i> before the Completion Date.
+                            </li>
+                        </ul>
+                        <p class="mt-3">If no programme is identified in part two of the Contract Data</p>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>Contractor</i> is to submit a first programme for acceptance within
+                                <div class="input-group">
+                                    <input name="first_programme_within" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;" required>
+                                    <label class="input-group-text mt-2">weeks of the Contract Date.</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="mb-4">
+                            <p class="mt-3">If the <i>Employer</i> has identified work which is to meet a stated <i>condition</i> by a <i>key date</i></p>
+                            <li class="mb-3">The <i>key dates</i> and <i>conditions</i> to be met are
+                                <p class="mt-2 mb-3"><i>condition</i> to be met</p>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <input type="text" name="condition_1" class="form-control" required>
+                                    <div class="input-group-append">
+                                        <input class="form-control" type="datetime-local" id="key_date_1" name="key_date_1" style="border-bottom-left-radius: 0; border-top-left-radius: 0;" required="required" value="">
+                                        <div class="text-danger" data-error="access_date_1"></div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <input type="text" name="condition_2" class="form-control" required>
+                                    <div class="input-group-append">
+                                        <input class="form-control" type="datetime-local" id="key_date_2" name="key_date_2" style="border-bottom-left-radius: 0; border-top-left-radius: 0;" required="required" value="">
+                                        <div class="text-danger" data-error="access_date_2"></div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <input type="text" name="condition_3" class="form-control" required>
+                                    <div class="input-group-append">
+                                        <input class="form-control" type="datetime-local" id="key_date_3" name="key_date_3" style="border-bottom-left-radius: 0; border-top-left-radius: 0;" required="required" value="">
+                                        <div class="text-danger" data-error="access_date_3"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="mt-3">If the period in which payments are made is not three weeks and Y(UK)2 is not used</p>
+                        <ul class="mb-4">
+                            <li class="mb-3">The period within which payments are made is
+                                <div class="input-group">
+                                    <input name="payment_period_yuk2_number" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;" required>
+                                    <div class="input-group-append">
+                                        <input name="payment_period_yuk2_text" type="text" class="form-control mt-2" style="flex: inherit; width: 100px;" value="weeks." required>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="mt-3">If Y(UK)2 is used and the final date for payment is not 14 days after the date when payment is due</p>
+                        <ul class="mb-4">
+                            <li class="mb-3">The period for payment is
+                                <div class="input-group">
+                                    <input name="payment_period_not_yuk2_number" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;" required>
+                                    <div class="input-group-append">
+                                        <input name="payment_period_not_yuk2_text" type="text" class="form-control mt-2" style="flex: inherit; width: 100px;" value="weeks." required>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="mt-3">If there are additional <i>Employer</i> risks</p>
+                        <ul class="mb-4">
+                            <li class="mb-3">These are the additional <i>Employer</i> risks
+                                <div class="input-group mt-3 mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <input type="text" name="employer_risk_1" class="form-control">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <input type="text" name="employer_risk_2" class="form-control">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <input type="text" name="employer_risk_3" class="form-control">
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="mt-3">If the <i>Employer</i> is to provide Plant and Materials</p>
+                        <ul class="mb-4">
+                            <li class="mb-3">The insurance against loss of damage to the <i>works</i>, Plant and Materials is to include cover for Plant and Materials provided by the <i>Employer</i> for an amount of
+                                <input name="employer_insurance_plant_materials" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;" required>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Seven "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part one - Data provided by the <i>Employer</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+                        <h4 class="card-title mt-4 mb-3">Optional Statements</h4>
+
+                        <p class="mt-3">If the <i>Employer</i> is to provide any of the insurances stated in the Insurance Table</p>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>Employer</i> provides these insurances from the Insurance Table
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Insurances against</span>
+                                    </div>
+                                    <input name="employer_insurance_table_insurance_against_1" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cover/indemnity is</span>
+                                    </div>
+                                    <input name="employer_insurance_table_indemnity_is_1" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">The deductibles are</span>
+                                    </div>
+                                    <input name="employer_insurance_table_deductibles_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Insurances against</span>
+                                    </div>
+                                    <input name="employer_insurance_table_insurance_against_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cover/indemnity is</span>
+                                    </div>
+                                    <input name="employer_insurance_table_indemnity_is_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">The deductibles are</span>
+                                    </div>
+                                    <input name="employer_insurance_table_deductibles_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Insurances against</span>
+                                    </div>
+                                    <input name="employer_insurance_table_insurance_against_3" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cover/indemnity is</span>
+                                    </div>
+                                    <input name="employer_insurance_table_indemnity_is_3" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">The deductibles are</span>
+                                    </div>
+                                    <input name="employer_insurance_table_deductibles_3" type="text" class="form-control">
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="mt-3">If additional insurances are to be provided</p>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>Employer</i> provides these additional insurances
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Insurances against</span>
+                                    </div>
+                                    <input name="employer_insurance_additional_against_1" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cover/indemnity is</span>
+                                    </div>
+                                    <input name="employer_insurance_additional_indemnity_is_1" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">The deductibles are</span>
+                                    </div>
+                                    <input name="employer_insurance_additional_deductibles_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Insurances against</span>
+                                    </div>
+                                    <input name="employer_insurance_additional_against_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cover/indemnity is</span>
+                                    </div>
+                                    <input name="employer_insurance_additional_indemnity_is_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">The deductibles are</span>
+                                    </div>
+                                    <input name="employer_insurance_additional_deductibles_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Insurances against</span>
+                                    </div>
+                                    <input name="employer_insurance_additional_against_3" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cover/indemnity is</span>
+                                    </div>
+                                    <input name="employer_insurance_additional_indemnity_is_3" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">The deductibles are</span>
+                                    </div>
+                                    <input name="employer_insurance_additional_deductibles_3" type="text" class="form-control">
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="mt-3">If additional insurances are to be provided</p>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>Contractor</i> provides these additional insurances
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Insurances against</span>
+                                    </div>
+                                    <input name="contractor_insurance_additional_against_1" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cover/indemnity is</span>
+                                    </div>
+                                    <input name="contractor_insurance_additional_indemnity_is_1" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">The deductibles are</span>
+                                    </div>
+                                    <input name="contractor_insurance_additional_deductibles_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Insurances against</span>
+                                    </div>
+                                    <input name="contractor_insurance_additional_against_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cover/indemnity is</span>
+                                    </div>
+                                    <input name="contractor_insurance_additional_indemnity_is_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">The deductibles are</span>
+                                    </div>
+                                    <input name="contractor_insurance_additional_deductibles_2" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Insurances against</span>
+                                    </div>
+                                    <input name="contractor_insurance_additional_against_3" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Cover/indemnity is</span>
+                                    </div>
+                                    <input name="contractor_insurance_additional_indemnity_is_3" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">3</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">The deductibles are</span>
+                                    </div>
+                                    <input name="contractor_insurance_additional_deductibles_3" type="text" class="form-control">
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="mb-4" style="margin-left: -1rem !important;">
+                            <li class="mb-3">
+                                <p class="mt-3">The <i>method of measurement</i> is</p>
+                                <textarea name="method_of_measurement_is" class="form-control mt-2" rows="3" required></textarea>
+                                <p class="mt-3">amended as follows</p>
+                                <textarea name="method_of_measurement_amendments" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Seven "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part one - Data provided by the <i>Employer</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+
+                        <div id="if_x1_used">
+                            <p class="mt-3">If Option X1 is used</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The proportions used to calculate the Price Adjustment Factor are
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input name="paf_1_number" type="number" step="0.01" min="0" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0; width: 100px;" required>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">linked to the index for</span>
+                                        </div>
+                                        <input name="paf_1_text" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input name="paf_2_number" type="number" step="0.01" min="0" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0; width: 100px;" required>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">linked to the index for</span>
+                                        </div>
+                                        <input name="paf_2_text" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input name="paf_3_number" type="number" step="0.01" min="0" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0; width: 100px;" required>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">linked to the index for</span>
+                                        </div>
+                                        <input name="paf_3_text" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input name="paf_4_number" type="number" step="0.01" min="0" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0; width: 100px;" required>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">linked to the index for</span>
+                                        </div>
+                                        <input name="paf_4_text" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input name="paf_5_number" type="number" step="0.01" min="0" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0; width: 100px;" required>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">linked to the index for</span>
+                                        </div>
+                                        <input name="paf_5_text" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input name="paf_6_number" type="number" step="0.01" min="0" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0; width: 100px;" required>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">linked to the index for</span>
+                                        </div>
+                                        <input name="paf_6_text" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input name="paf_7" type="number" step="0.01" min="0" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0; width: 100px;" required>
+                                        </div>
+                                        <label class="input-group-text">non-adjustable.</label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="mb-4">
+                                <li class="mb-3">The <i>base date</i> for indices is
+                                    <input class="form-control mt-2" type="datetime-local" id="base_date" name="base_date" style="width: 220px;" required </li>
+                                <li class="mb-3">The indices are those prepared by
+                                    <input class="form-control mt-2" type="text" id="indices_prepared_by" required>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="if_x3_used">
+                            <p class="mt-3">If Option X3 is used</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The <i>Employer</i> will pay for the items or activities listed below in the currencies stated
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">1</span>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">items and activities</span>
+                                        </div>
+                                        <input name="items_activities_employer_pay_1" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">1</span>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">other currency</span>
+                                        </div>
+                                        <input name="other_currency_employer_pay_1" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">1</span>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">total maximum payment in the currency</span>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <input name="max_currency_employer_pay_1" type="number" class="form-control" style="width: 100px;">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-3">The <i>exchange rates</i> are those published in
+                                    <div class="input-group mt-2">
+                                        <input class="form-control" type="text" name="exchange_rates_text">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">on</span>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="datetime-local" name="exchange_rates_date" style="width: 220px;">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x5_used">
+                            <p class="mt-3">If Option X5 is used</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The <i>completion date</i> for each <i>section</i> of the <i>works</i> is
+                                    <div class="row mt-2">
+                                        <p class="col-md-10"><i>section</i> description</p>
+                                        <p class="col-md-2" style="text-align: right"><i>completion date</i></p>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">1</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="completion_date_1_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="datetime-local" name="completion_date_1" style="width: 220px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">2</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="completion_date_2_text_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="datetime-local" name="completion_date_2" style="width: 220px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">3</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="completion_date_3_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="datetime-local" name="completion_date_3" style="width: 220px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">4</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="completion_date_4_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="datetime-local" name="completion_date_4" style="width: 220px;">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x5_x6_used">
+                            <p class="mt-3">If Options X5 and X6 are used together</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The bonus for each <i>section</i> of the <i>works</i> is
+                                    <div class="row mt-2">
+                                        <p class="col-md-10"><i>section</i> of the <i>works</i></p>
+                                        <p class="col-md-2" style="text-align: right">amount per day</p>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">1</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="bonus_1_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="bonus_1_number" style="width: 100px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">2</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="bonus_2_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="bonus_2_number" style="width: 100px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">3</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="bonus_3_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="bonus_3_number" style="width: 100px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">4</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="bonus_4_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="bonus_4_number" style="width: 100px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Remainder of the&nbsp;<i>works</i></span>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="bonus_remainder_number" style="width: 100px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x5_x7_used">
+                            <p class="mt-3">If Options X5 and X7 are used together</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">Delay damages for each <i>section</i> of the <i>works</i> are
+                                    <div class="row mt-2">
+                                        <p class="col-md-10"><i>section</i> description</p>
+                                        <p class="col-md-2" style="text-align: right">amount per day</p>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">1</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="delay_damages_1_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="delay_damages_1_number" style="width: 100px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">2</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="delay_damages_2_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="delay_damages_2_number" style="width: 100px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">3</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="delay_damages_3_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="delay_damages_3_number" style="width: 100px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">4</span>
+                                        </div>
+                                        <input class="form-control" type="text" name="delay_damages_4_text">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="delay_damages_4_number" style="width: 100px;">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Remainder of the&nbsp;<i>works</i></span>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="delay_damages_remainder_number" style="width: 100px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x6_used_not_x5_used">
+                            <p class="mt-3">If Option X6 is used <small>(but not if Option X5 is also used)</small></p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The bonus for the of the <i>works</i> is
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="x6_bonus_number" style="width: 100px;">
+                                        </div>
+                                        <label class="input-group-text">per day.</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x7_used_not_x5_used">
+                            <p class="mt-3">If Option X7 is used <small>(but not if Option X5 is also used)</small></p>
+                            <ul class="mb-4">
+                                <li class="mb-3">Delay damages for Completion of the whole of the <i>works</i> are
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="x7_delay_damages_number" style="width: 100px;">
+                                        </div>
+                                        <label class="input-group-text">per day.</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x12_used">
+                            <p class="mt-3">If Option X12 is used</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The <i>Client</i> is
+                                    <textarea name="x12_client_is" class="form-control mt-2" rows="3" placeholder="Enter the name and address"></textarea>
+                                </li>
+                                <li class="mb-3">The <i>Client's objective</i> is
+                                    <textarea name="x12_client_objective_is" class="form-control mt-2" rows="3"></textarea>
+                                </li>
+                                <li class="mb-3">The Partnering Information is in
+                                    <textarea name="x12_partnering_information_in" class="form-control mt-2" rows="3"></textarea>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x13_used">
+                            <p class="mt-3">If Option X13 is used</p><p class="mt-3">
+                            <ul class="mb-4">
+                                <li class="mb-3">The amount of the performace bond is
+                                    <input class="form-control" type="number" name="x13_performance_bond" style="width: 100px;">
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x14_used">
+                            <p class="mt-3">If Option X14 is used</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The amount of the advanced payment is
+                                    <input class="form-control" type="number" name="x14_advanced_payment" style="width: 100px;">
+                                </li>
+                                <li class="mb-3">The <i>Contractor</i> repays the instalments in assessments starting not less than
+                                    <div class="input-group">
+                                        <input name="x14_instalments_weeks" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;">
+                                        <label class="input-group-text mt-2">weeks after the Contract Date</label>
+                                    </div>
+                                </li>
+                                <li class="mb-3">The instalments are
+                                    <div class="row mt-2">
+                                        <small class="mb-2">(either an amount or a percentage of the payment otherwise due)</small>
+                                        <p class="col-md-6">amount</p>
+                                        <p class="col-md-6">percentage</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <input name="x14_instalments_amount" type="number" class="form-control" style="flex: inherit; width: 100px;">
+                                                <label class="input-group-text">weeks after the Contract Date</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <input name="x14_instalments_percent" type="number" class="form-control" style="flex: inherit; width: 100px;">
+                                                <label class="input-group-text">weeks after the Contract Date</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-3">An advanced payment bond
+                                    <div class="row pt-2">
+                                        <input type="checkbox" name="x14_bond" class="customized" />
+                                        <label style="width: calc(100% - 100px); font-weight: 400;">is required</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x16_used">
+                            <p class="mt-3">If Option X16 is used</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The <i>retention free amount</i> is
+                                    <div class="input-group">
+                                        <input name="x16_retention_free_amount" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;">
+                                    </div>
+                                </li>
+                                <li class="mb-3">The <i>retention percentage</i> is
+                                    <div class="input-group">
+                                        <input name="x16_retention_percent" type="number" class="form-control mt-2" style="flex: inherit; width: 100px;">
+                                        <label class="input-group-text mt-2">%</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x17_used">
+                            <p class="mt-3">If Option X17 is used</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The amounts for low performace damages are
+                                    <div class="row mt-2">
+                                        <p class="col-md-2">amount
+                                            <p class="col-md-10">performance level</p>
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <input name="x17_damages_1_number" type="number" class="form-control" style="flex: inherit; width: 100px;">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="border-radius: 0;">for</span>
+                                        </div>
+                                        <input name="x17_damages_1_text" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <input name="x17_damages_2_number" type="number" class="form-control" style="flex: inherit; width: 100px;">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="border-radius: 0;">for</span>
+                                        </div>
+                                        <input name="x17_damages_2_text" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <input name="x17_damages_3_number" type="number" class="form-control" style="flex: inherit; width: 100px;">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="border-radius: 0;">for</span>
+                                        </div>
+                                        <input name="x17_damages_3_text" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mt-2">
+                                        <input name="x17_damages_4_number" type="number" class="form-control" style="flex: inherit; width: 100px;">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="border-radius: 0;">for</span>
+                                        </div>
+                                        <input name="x17_damages_4_text" type="text" class="form-control">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x18_used">
+                            <p class="mt-3">If Option X17 is used</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The <i>Contractor</i>'s liability to the <i>Employer</i> for indirect or consequential loss is limited to
+                                    <textarea name="x18_indirect_loss" class="form-control mt-2" rows="3"></textarea>
+                                </li>
+                                <li class="mb-3">For any one event, the <i>Contractor</i>'s liability to the <i>Employer</i> for loss of or damage to the <i>Employer</i>'s property is limited to
+                                    <textarea name="x18_loss_damage" class="form-control mt-2" rows="3"></textarea>
+                                </li>
+                                <li class="mb-3">The <i>Contractor</i>'s liability for Defects due to his design which are not listed on the Defects Certificate is limited to
+                                    <textarea name="x18_loss_damage" class="form-control mt-2" rows="3"></textarea>
+                                </li>
+                                <li class="mb-3">The <i>Contractor</i>'s total liability to the <i>Employer</i> for all matters arising under or in connection with this contract, other than excluded matters, is limited to
+                                    <textarea name="x18_loss_damage" class="form-control mt-2" rows="3"></textarea>
+                                </li>
+                                <li class="mb-3">The <i>end of liability</i> date is
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="x17_end_liability_number" style="width: 100px;">
+                                        </div>
+                                        <label class="input-group-text">years after the Completion of the whole of the&nbsp;<i>works</i>.</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_x20_used">
+                            <p class="mt-3">If Option X20 is used <small>(but not if Option X12 is also used)</small></p>
+                            <ul class="mb-4">
+                                <li class="mb-3">The <i>incentive schedule</i> for Key Performance Indicators is in
+                                    <textarea name="x20_incentive_schedule" class="form-control mt-2" rows="3"></textarea>
+                                </li>
+                                <li class="mb-3">A report of performance against each Key Performance Indicator is provided at intervals of
+                                    <div class="input-group mt-2">
+                                        <div class="input-group-prepend">
+                                            <input class="form-control" type="number" name="x20_kpi_number" style="width: 100px;">
+                                        </div>
+                                        <label class="input-group-text">months.</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_yuk1_used">
+                            <p class="mt-3">If Option Y(UK)1 is used and the <i>Employer</i> is to pay any charges made and is paid any interest paid by the <i>project bank</i>.</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">the <i>Employer</i> is to pay any charges made and is paid any interest paid by the <i>project bank</i>.
+                                    <textarea name="x20_incentive_schedule" class="form-control mt-2" rows="3"></textarea>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_yuk3_used">
+                            <p class="mt-3">If Option Y(UK)3 is used</p>
+                            <ul class="mb-4">
+                                <div class="row">
+                                    <div class="col-md-6" style="padding: 0;">
+                                        </p>>term</p>
+                                        <input type="text" name="yuk3_term_text_1" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-6" style="padding-left: 0;">
+                                        </p>>person or organisation</p>
+                                        <input type="text" name="yuk3_term_text_person_1" class="form-control" style="margin-left: -1px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6" style="padding: 0;">
+                                        <input type="text" name="yuk3_term_text_2" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-6" style="padding-left: 0;">
+                                        <input type="text" name="yuk3_term_text_person_2" class="form-control" style="margin-left: -1px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6" style="padding: 0;">
+                                        <input type="text" name="yuk3_term_text_3" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-6" style="padding-left: 0;">
+                                        <input type="text" name="yuk3_term_text_person_3" class="form-control" style="margin-left: -1px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6" style="padding: 0;">
+                                        <input type="text" name="yuk3_term_text_4" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-6" style="padding-left: 0;">
+                                        <input type="text" name="yuk3_term_text_person_14" class="form-control" style="margin-left: -1px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                                    </div>
+                                </div>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_yuk1_yuk3_used">
+                            <p class="mt-3">If Options Y(UK)1 and Y(UK)3 are both used</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            </p>>term</p>
+                                            <p>
+                                                The provisions of Option Y(UK)1
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            </p>>person or organisation</p>
+                                            <p>
+                                                Named Suppliers
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="if_z1_used">
+                            <p class="mt-3">If Option Z is used</p>
+                            <ul class="mb-4">
+                                <li class="mb-3">
+                                    The <i>additional conditions of contract</i> are
+                                </li>
+                                <textarea name="z1" class="form-control mt-2" rows="3"></textarea>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <!-- PART TWO -->
+                    <!-- Step form Part two  for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part two - Data provided by the <i>Contractor</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+                        <ul class="mb-4">
+                            <li class="mb-3">The <i>Contractor</i> is
+                                <p class="mb-0 mt-3">Name</p>
+                                <input type="text" name="contractor_name_is" class="form-control mt-2" required>
+                                <p class="mb-0 mt-3">Address</p>
+                                <textarea name="contractor_address_is" class="form-control mt-2" rows="3" required></textarea>
+                            </li>
+                            <li class="mb-3">The <i>direct fee</i> percentage is
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <input class="form-control" type="number" name="direct_fee" style="width: 100px;">
+                                    </div>
+                                    <label class="input-group-text">%</label>
+                                </div>
+                            </li>
+                            <li class="mb-3">The <i>subcontracted fee</i> percentage is
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <input class="form-control" type="number" name="subcontracted_fee" style="width: 100px;">
+                                    </div>
+                                    <label class="input-group-text">%</label>
+                                </div>
+                            </li>
+                            <li class="mb-3">The <i>Key People</i> are
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Name</span>
+                                    </div>
+                                    <input name="key_people_1_name" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Job</span>
+                                    </div>
+                                    <input name="key_people_1_job" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Responsibilities</span>
+                                    </div>
+                                    <input name="key_people_1_resp" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Qualifications</span>
+                                    </div>
+                                    <input name="key_people_1_qual" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">1</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Experience</span>
+                                    </div>
+                                    <input name="key_people_1_exp" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Name</span>
+                                    </div>
+                                    <input name="key_people_2_name" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Job</span>
+                                    </div>
+                                    <input name="key_people_2_job" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Responsibilities</span>
+                                    </div>
+                                    <input name="key_people_2_resp" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Qualifications</span>
+                                    </div>
+                                    <input name="key_people_2_qual" type="text" class="form-control">
+                                </div>
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">2</span>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Experience</span>
+                                    </div>
+                                    <input name="key_people_2_exp" type="text" class="form-control">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Six "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part two - Data provided by the <i>Contractor</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+                        <ul class="mb-4">
+                            <h4 class="card-title mt-4 mb-3">Optional Statements</h4>
+                            <p class="mt-3">If the <i>Contractor</i> is to provide Works Information for his design</p>
+                            <li class="mb-3">The programme identified in the Contract Data is
+                                <textarea name="contractor_ident_prog" class="form-control mt-2" rows="3"></textarea>
+                            </li>
+                            <p class="mt-3">If a programme is to be identified in the Contract Data</p>
+                            <li class="mb-3">The Works Information for the <i>Contractor</i>'s design is in
+                                <textarea name="contractor_wi" class="form-control mt-2" rows="3"></textarea>
+                            </li>
+                            <p class="mt-3">If the <i>Contractor</i> is to decide the <i>completion date</i> for the whole of the <i>works</i></p>
+                            <li class="mb-3">The <i>completion date</i> for the whole of the <i>works</i> is
+                                <textarea name="contractor_wi" class="form-control mt-2" rows="3"></textarea>
+                            </li>
+                            <p class="mt-3">If Option Y(UK)1 is used</p>
+                            <li class="mb-3">The <i>project bank</i> is
+                                <textarea name="project_bank" class="form-control mt-2" rows="3"></textarea>
+                            </li>
+                            <li class="mb-3">The <i>named suppliers</i> are
+                                <textarea name="named_suppliers" class="form-control mt-2" rows="3"></textarea>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Six "tab" for each step in the form: -->
+                    <div class="tab">
+                        <h4>CONTRACT DATA</h4>
+                        <h5 class="pt-5 border-top">Part two - Data provided by the <i>Contractor</i></h5>
+                        <strong>Statement given in all contracts</strong>
+                        <hr>
+                        <strong>Data for the Shorter Schedule of Cost Components</strong>
+                        <ul class="mt-3 mb-4">
+                            <li class="mb-3">The <i>bill of quantities</i> is
+                                <textarea name="bill_of_quantities_is" class="form-control mt-2" rows="3">the bill of quantities table (below).</textarea>
+                            </li>
+                            <li class="mb-3">The tendered total of the Prices is
+                                <input class="form-control mt-2" type="number" name="total_prices" style="width: 100px;">
+                            </li>
+                            <li class="mb-3">The percentage for people overheads is
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <input class="form-control" type="number" name="people_oh_percent" style="width: 100px;">
+                                    </div>
+                                    <label class="input-group-text">%</label>
+                                </div>
+                            </li>
+                            <li class="mb-3">The published list of Equipment is the last edition of the list published by
+                                <input class="form-control mt-2" type="text" name="equipment_publisher">
+                            </li>
+                            <li class="mb-3">The percentage adjustment for Equipment in the published list is
+                                <div class="input-group mt-2">
+                                    <input class="form-control" type="number" name="equipment_adj" style="width: 100px; flex: none;">
+                                    <label class="input-group-text">%</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="mb-4">
+                            <li class="mb-3">The rates for other Equipment are
+                                <div class="row mt-2">
+                                    <div class="col-md-6" style="padding: 0;">
+                                        </p>>Equipment</p>
+                                        <input type="text" name="equipment_text_1" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-4" style="padding: 0;">
+                                        </p>>size or capacity</p>
+                                        <input type="text" name="equipment_size_1" class="form-control" style="border-radius: 0; margin-left: -1px;">
+                                    </div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        </p>>rate</p>
+                                        <input type="text" name="equipment_rate_1" class="form-control" style="margin-left: -2px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6" style="padding: 0;">
+                                        <input type="text" name="equipment_text_2" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-4" style="padding: 0;">
+                                        <input type="text" name="equipment_size_2" class="form-control" style="border-radius: 0; margin-left: -1px;">
+                                    </div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        <input type="text" name="equipment_rate_2" class="form-control" style="margin-left: -2px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6" style="padding: 0;">
+                                        <input type="text" name="equipment_text_3" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-4" style="padding: 0;">
+                                        <input type="text" name="equipment_size_3" class="form-control" style="border-radius: 0; margin-left: -1px;">
+                                    </div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        <input type="text" name="equipment_rate_3" class="form-control" style="margin-left: -2px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-6" style="padding: 0;">
+                                        <input type="text" name="equipment_text_4" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-4" style="padding: 0;">
+                                        <input type="text" name="equipment_size_4" class="form-control" style="border-radius: 0; margin-left: -1px;">
+                                    </div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        <input type="text" name="equipment_rate_4" class="form-control" style="margin-left: -2px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="mb-4">
+                            <li class="mb-3">The hourly rates for Defined Cost of design outside the Working Areas are
+                                <div class="row mt-2">
+                                    <div class="col-md-10" style="padding: 0;">
+                                        </p>>category of employee</p>
+                                        <input type="text" name="defined_cost_design_text_1" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        </p>>hourly rate</p>
+                                        <input type="number" name="defined_cost_design_rate_1" class="form-control" style="border-radius: 0; margin-left: -1px;">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-10" style="padding: 0;">
+                                        <input type="text" name="defined_cost_design_text_2" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        <input type="number" name="defined_cost_design_rate_2" class="form-control" style="border-radius: 0; margin-left: -1px;">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-10" style="padding: 0;">
+                                        <input type="text" name="defined_cost_design_text_3" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        <input type="number" name="defined_cost_design_rate_3" class="form-control" style="border-radius: 0; margin-left: -1px;">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-10" style="padding: 0;">
+                                        <input type="text" name="defined_cost_design_text_4" class="form-control" style="border-bottom-right-radius: 0; border-top-right-radius: 0;">
+                                    </div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        <input type="number" name="defined_cost_design_rate_4" class="form-control" style="border-radius: 0; margin-left: -1px;">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mb-3">The percentage for design overheads is
+                                <div class="input-group mt-2">
+                                    <div class="input-group-prepend">
+                                        <input class="form-control" type="number" name="design_oh_percent" style="width: 100px;">
+                                    </div>
+                                    <label class="input-group-text">%</label>
+                                </div>
+                            </li>
+                            <li class="mb-3">The categories of design employees whose travelling expenses to and from the Working Areas are included in Defined Cost are
+                                <textarea name="design_expenses_cats" class="form-control mt-2" rows="3"></textarea>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- buttons for next previous and submit -->
+                    <div style="overflow:auto;">
+                        <div style="float:right; margin-top: 5px;">
+                            <button type="button" class="previous btn btn-success btn-rounded w-md waves-effect waves-light">Previous</button>
+                            <button type="button" class="next btn btn-success btn-rounded w-md waves-effect waves-light">Next&nbsp;<i class="bx bx-send ms-1"></i></button>
+                            <button type="button" class="submit btn btn-success btn-rounded w-md waves-effect waves-light">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- Three "tab" for each step in the form: -->
+                    <!-- <div class="tab" id="activity-schedule">  -->
+                    <h4 class="card-title text-center">Activity Schedule</label>
+                    </h4>
+                    <div class="row mb-3">
+                        <div class="row mt-3 mb-2">
+                            <div class="col-md-7">
+                                <label class="form-label">Item</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label">Qty</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label">Unit</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label">Price £</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label" style="text-align: center;">Actions</label>
+                            </div>
+                        </div>
+                        <div id="activity-schedule-container"></div>
+                    </div>
+                    <!-- </div> -->
+
+                    <!-- Four "tab" for each step in the form: -->
+                    <!-- <div class="tab" id="bill-of-quantities"> -->
+                    <h4 class="card-title text-center">Bill of Quantities</label>
+                    </h4>
+                    <div class="row mb-3">
+                        <div class="row mt-3 mb-2">
+                            <div class="col-md-7">
+                                <label class="form-label">Item</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label">Qty</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label">Unit</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label">Rate £</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label">Price £</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label" style="text-align: center;">Actions</label>
+                            </div>
+                        </div>
+                        <div id="bill-of-quantities-schedule-container"></div>
+                    </div>
+
+                    <!-- </div> -->
+
+
+                </div>
+
+            </div>
+        </form>
+
+        <!-- <div class="card">
+            <div class="card-body">
+                <div class="row float-end row mt-5 pb-3">
+                    <button class="btn btn-success btn-rounded w-md waves-effect waves-light">Continue&nbsp;<i class="bx bx-send ms-1"></i></button>
+                </div>
+                </form>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-xl-9 col-lg-8">
+        <div class="card p-5">
+            <p style="color: red;">@Maxim this is the existing form</p>
+            <div class="card-body">
+                <p class="card-title-desc">Please complete all fields below</p>
+                <form id="create-contract" method="POST" autocomplete="off">
+                    @csrf
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="mb-3">
+                                <label class="form-label">Contract name</label>
+                                <input class="form-control" type="text" name="contract_name">
+                                <div class="text-danger" data-error="contract_name"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="form-label">Contractor name</label>
+                                <select name="contractor_name" id="contractor_name" class="form-select">
+                                    <option value="" selected>Select</option>
+                                    <option value="MMB">MMB</option>
+                                    <option value="Lanes-i">Lanes-i</option>
+                                    <option value="CCN">CCN</option>
+                                </select>
+                                <div class="text-danger" data-error="contractor_name"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label class="form-label">Order ref</label>
+                                <input class="form-control" type="text" name="order_ref">
+                                <div class="text-danger" data-error="order_ref"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row float-end row mt-5 pb-3">
+                        <button type="submit" class="btn btn-success btn-rounded w-md waves-effect waves-light">Continue&nbsp;<i class="bx bx-send ms-1"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('script')
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="{{URL::asset('/assets/js/multi-form.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#contractForm").multiStepForm({
+            // defaultStep:0,
+            beforeSubmit: function(form, submit) {
+                console.log("called before submiting the form");
+                console.log(form);
+                console.log(submit);
+            },
+            // validations:{},
+        }).navigateTo(0);
+    });
+</script>
+<script>
+    jQuery(($) => {
+        $('#create-contract').on('submit', function(e) {
+            e.preventDefault();
+            removeFormErrors(this);
+
+            form_ajax('{{ t_route("contracts.store") }}', this, {
+                redirect: "{{ t_route('contracts') }}"
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+
+        $("button#continue-1").hide();
+        $("div#contents").hide();
+        $("select.form-select").val('Select');
+        $("button#continue-1").click(function() {
+            $("button#continue-1").hide();
+            $("div#contents").show();
+        });
+
+        // If ECC is selected
+        $("a#ECC-tab").click(function() {
+            if ($(this).hasClass("active"))
+                $("button#continue-1").show();
+            $("select.form-select").val('Select');
+            // ECC
+            $("option#ecc-opt-a").show();
+            $("option#ecc-opt-b").show();
+            $("option#ecc-opt-c").show();
+            $("option#ecc-opt-d").show();
+            $("option#ecc-opt-e").show();
+            $("option#ecc-opt-f").show();
+            // ECS
+            $("option#ecs-opt-a").hide();
+            $("option#ecs-opt-b").hide();
+            $("option#ecs-opt-c").hide();
+            $("option#ecs-opt-d").hide();
+            $("option#ecs-opt-e").hide();
+            // TSC
+            $("option#tsc-opt-a").hide();
+            $("option#tsc-opt-c").hide();
+            $("option#tsc-opt-e").hide();
+
+            $(".works_or_service").text(function() {
+                return $(this).text().replace("Service", "Works");
+            });
+
+            $(".selected_contract").text("NEC3 Engineering and Construction Contract April 2013");
+
+            $("#activity-schedule").show();
+            $("#bill-of-quantities").show();
+            $("#price-list").hide();
+        });
+
+        // If ESC is selected
+        $("a#ECS-tab").click(function() {
+            if ($(this).hasClass("active"))
+                $("button#continue-1").show();
+            $("select.form-select").val('Select');
+            // ECC
+            $("option#ecc-opt-a").hide();
+            $("option#ecc-opt-b").hide();
+            $("option#ecc-opt-c").hide();
+            $("option#ecc-opt-d").hide();
+            $("option#ecc-opt-e").hide();
+            $("option#ecc-opt-f").hide();
+            // ECS
+            $("option#ecs-opt-a").show();
+            $("option#ecs-opt-b").show();
+            $("option#ecs-opt-c").show();
+            $("option#ecs-opt-d").show();
+            $("option#ecs-opt-e").show();
+            // TSC
+            $("option#tsc-opt-a").hide();
+            $("option#tsc-opt-c").hide();
+            $("option#tsc-opt-e").hide();
+
+            $(".works_or_service").text(function() {
+                return $(this).text().replace("Service", "Works");
+            });
+
+            $(".selected_contract").text("NEC3 Engineering and Construction Subcontract April 2013");
+
+            $("#activity-schedule").show();
+            $("#bill-of-quantities").show();
+            $("#price-list").hide();
+        });
+
+        // If TSC is selected
+        $("a#TSC-tab").click(function() {
+            if ($(this).hasClass("active"))
+                $("button#continue-1").show();
+            $("select.form-select").val('Select');
+            // ECC
+            $("option#ecc-opt-a").hide();
+            $("option#ecc-opt-b").hide();
+            $("option#ecc-opt-c").hide();
+            $("option#ecc-opt-d").hide();
+            $("option#ecc-opt-e").hide();
+            $("option#ecc-opt-f").hide();
+            // ECS
+            $("option#ecs-opt-a").hide();
+            $("option#ecs-opt-b").hide();
+            $("option#ecs-opt-c").hide();
+            $("option#ecs-opt-d").hide();
+            $("option#ecs-opt-e").hide();
+            // TSC
+            $("option#tsc-opt-a").show();
+            $("option#tsc-opt-c").show();
+            $("option#tsc-opt-e").show();
+            $('div#row-x5').hide();
+            $('div#row-x6').hide();
+            $('div#row-x7').hide();
+            $('div#row-x14').hide();
+            $('div#row-x15').hide();
+            $('div#row-x16').hide();
+
+            $(".works_or_service").text(function() {
+                return $(this).text().replace("Works", "Service");
+            });
+
+            $(".selected_contract").text("NEC3 Term Services Contract April 2013");
+
+            $("#activity-schedule").hide();
+            $("#bill-of-quantities").hide();
+            $("#price-list").show();
+        });
+
+        // FIX THIS
+        $('input[type="checkbox"]').change(function(e) {
+            var txt = $('.secondary-option.input:checked').closest('label').each(function() {
+                return $(this).val();
+            }).get().join(', ');
+            $('#selected_secondary_options').text(txt);
+            console.log(txt);
+        });
+
+
+        $("select#dispute_resolution_option").on('change', function() {
+            $('.selected_dispute_resolution_option').text(this.value);
+        });
+
+
+        // Main options - X1 not used on E & F      
+        $("select#main_option").change(function() {
+            if ($('option#ecc-opt-e').is(':selected')) {
+                $('div#row-x1').hide();
+                $('div#if_x1_used').hide();
+            } else if ($('option#ecc-opt-f').is(':selected')) {
+                $('div#row-x1').hide();
+                $('div#if_x1_used').hide();
+            } else {
+                $('div#row-x1').show();
+                $('div#if_x1_used').show();
+            }
+        });
+
+        // Main options under ECC - X3 only used on A & B      
+        $("select#main_option").change(function() {
+            if ($('option#ecc-opt-a').is(':selected')) {
+                $('div#row-x3').show();
+                $('div#if_x3_used').show();
+            } else if ($('option#ecc-opt-b').is(':selected')) {
+                $('div#row-x3').show();
+                $('div#if_x3_used').show();
+            } else {
+                $('div#row-x3').hide();
+                $('div#if_x3_used').hide();
+            }
+        });
+
+        // Main options under ECC - X16 not used on F      
+        $("select#main_option").change(function() {
+            if ($('option#ecc-opt-f').is(':selected')) {
+                $('div#row-x16').hide();
+            } else {
+                // $('div#row-x16').show();
+            }
+        });
+
+        // Main options under TSC - X5, X6, X7 & X16 not used     
+        $("select#main_option").change(function() {
+            if ($('option#tsc-opt-a').is(':selected')) {
+                $('div#row-x3').show();
+            } else if ($('option#tsc-opt-c').is(':selected')) {
+                $('div#row-x3').hide();
+            } else if ($('option#tsc-opt-e').is(':selected')) {
+                $('div#row-x1').hide();
+                $('div#if_x1_used').hide();
+                $('div#row-x3').hide();
+            } else {
+
+            }
+        });
+
+        // Main options under ESC - X3 only used on A & B      
+        $("select#main_option").change(function() {
+            if ($('option#esc-opt-a').is(':selected')) {
+                $('div#row-x3').show();
+            } else if ($('option#ecs-opt-b').is(':selected')) {
+                $('div#row-x3').show();
+            } else {
+                //$('div#row-x3').hide();
+            }
+        });
+
+        // Main options - X20 not used if X12 is used      
+        $('input[name="x12"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $('div#row-x20').hide();
+                $("input[name=x20]").val("0");
+            } else if ($(this).prop("checked") == false) {
+                $('div#row-x20').show();
+            }
+        });
+        $('input[name="x20"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $('div#row-x12').hide();
+                $("input[name=x12]").val("0");
+            } else if ($(this).prop("checked") == false) {
+                $('div#row-x12').show();
+            }
+        });
+
+        // Secondary options
+        $('input[name="x1"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x1]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x1]").val("0");
+            }
+        });
+        $('input[name="x2"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x2]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x2]").val("0");
+            }
+        });
+        $('input[name="x3"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x3]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x3]").val("0");
+            }
+        });
+        $('input[name="x4"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x4]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x4]").val("0");
+            }
+        });
+        $('input[name="x5"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x5]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x5]").val("0");
+            }
+        });
+        $('input[name="x6"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x6]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x6]").val("0");
+            }
+        });
+        $('input[name="x7"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x7]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x7]").val("0");
+            }
+        });
+        $('input[name="x7"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x7]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x7]").val("0");
+            }
+        });
+        $('input[name="x12"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x12]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x12]").val("0");
+            }
+        });
+        $('input[name="x13"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x13]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x13]").val("0");
+            }
+        });
+        $('input[name="x14"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x14]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x14]").val("0");
+            }
+        });
+        $('input[name="x15"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x15]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x15]").val("0");
+            }
+        });
+        $('input[name="x16"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x16]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x16]").val("0");
+            }
+        });
+        $('input[name="x17"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x17]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x17]").val("0");
+            }
+        });
+        $('input[name="x18"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x18]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x18]").val("0");
+            }
+        });
+        $('input[name="x19"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x19]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x19]").val("0");
+            }
+        });
+        $('input[name="x20"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=x20]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=x20]").val("0");
+            }
+        });
+        $('input[name="yUK1"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=yUK1]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=yUK1]").val("0");
+            }
+        });
+        $('input[name="yUK2"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=yUK2]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=yUK2]").val("0");
+            }
+        });
+        $('input[name="yUK3"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=yUK3]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=yUK3]").val("0");
+            }
+        });
+        $('input[name="z1"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                $("input[name=z1]").val("1");
+            } else if ($(this).prop("checked") == false) {
+                $("input[name=z1]").val("0");
+            }
+        });
+
+
+    });
+</script>
+@endsection

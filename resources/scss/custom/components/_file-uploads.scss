@@ -1,0 +1,10 @@
+.dropzone.single-file {
+    min-height: 195px;
+    display: flex;
+    justify-content: center;
+}
+
+.dropzone .dz-preview .dz-image img {
+    width: 100%;
+    height: 100%;
+}
